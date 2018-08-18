@@ -1,3 +1,57 @@
-#selector {
+.studentAddBox {
+  transition: all 1s;
+}
+
+.infoForm,
+.formBtn,
+#addStudentPage,
+.avgBtn,
+.deleteBtn,
+#confirmationBoxHolder {
   transition: all 0.5s;
+}
+
+#selector {
+  transition: all 0.25s;
+}
+
+.studentAddBox > .infoForm {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.studentAddBox {
+  left: 0%;
+  top: 0%;
+  position: relative;
+  opacity: 1;
+}
+
+.studentAddBox.showForm {
+  left: 30%;
+  transform: scale(1.2);
+}
+
+.studentAddBox.showForm > .infoForm {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.formBtn:hover {
+  background-color: #fff;
+}
+
+.avgBtn:hover,
+.deleteBtn:hover {
+  background-color: #e0698b;
+}
+
+#addStudentPage.show {
+  z-index: 2;
+  opacity: 0.9;
+}
+
+#confirmationBoxHolder.confirmation {
+  z-index: 10;
+  opacity: 1;
 }

@@ -6,6 +6,7 @@ const StudentSchema = new Schema({
   testscore1: { type: String },
   testscore2: { type: String },
   testscore3: { type: String },
+  img: { type: String },
   date: { type: Date, default: Date.now() }
 })
 

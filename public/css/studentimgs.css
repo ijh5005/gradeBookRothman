@@ -1,0 +1,35 @@
+.fullBackground {
+  background-size: 100% 100%;
+}
+
+.girl {
+  background-image: url('../img/girl.png');
+}
+
+.cat {
+  background-image: url('../img/cat.png');
+}
+
+.bear {
+  background-image: url('../img/bear.png');
+}
+
+.fox {
+  background-image: url('../img/fox.png');
+}
+
+.owl {
+  background-image: url('../img/owl.png');
+}
+
+.rabbit {
+  background-image: url('../img/rabbit.png');
+}
+
+.shark {
+  background-image: url('../img/shark.png');
+}
+
+.dear {
+  background-image: url('../img/dear.png');
+}

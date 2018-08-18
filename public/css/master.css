@@ -1,15 +1,173 @@
-:root {
-
-}
+:root {}
 
 body {
+  background-color: #f4fcfa;
   font-family: 'M PLUS Rounded 1c', sans-serif;
 }
 
 /* general */
+*::-webkit-scrollbar {
+    width: 1em;
+}
+
+.addBtn {
+  -moz-box-shadow: 0px 7px 58px -2px rgba(110,244,208,1);
+  -webkit-box-shadow: 0px 7px 58px -2px rgba(110,244,208,1);
+  background-color: #3feabc;
+  border-radius: 0.8em;
+  box-shadow: 0px 7px 58px -2px rgba(110,244,208,1);
+  margin: 0 auto;
+  padding: 1em 2em;
+  text-align: center;
+  width: 20em;
+  position: relative;
+  top: 4em;
+}
+
+.addBtn p {
+  color: #fff;
+  font-size: 1.3em;
+  font-weight: 800;
+  margin: 0;
+  opacity: 0.72;
+}
+
+.label {
+  margin: 1em;
+}
 
 /* container */
+
 #container {
   height: 100vh;
   width: 100vw;
+}
+
+/* confirmation holder */
+
+#confirmationBoxHolder {
+  position: absolute;
+  z-index: -10;
+  opacity: 0;
+}
+
+#confirmationBox {
+  background-color: #3feabc;
+  border-radius: 50%;
+  color: #444;
+  height: 20em;
+  width: 20em;
+}
+
+#confirmationBox p {
+  font-size: 2em;
+  font-weight: 300;
+  text-align: center;
+}
+
+/* add student page */
+#addStudentPage {
+  background-color: #76cbed;
+  justify-content: flex-start;
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+#hideStudentChoiceSectionBtn {
+  height: 5em;
+  position: absolute;
+  right: 2em;
+  top: 2em;
+  width: 5em;
+  z-index: 1;
+}
+
+#hideStudentChoiceSectionBtn p {
+  color: #fff;
+  font-size: 4em;
+  margin: 0;
+  user-select: none;
+}
+
+#studentChoiceSection {
+  overflow: scroll;
+  padding-left: 8em;
+  z-index: 2;
+}
+
+.studentAddBox {
+  height: 12em;
+  margin: 1em 2em;
+  width: 26em;
+}
+
+.studentToAdd {
+  border-radius: 50%;
+  height: 10em;
+  margin: 0 1em;
+  width: 10em;
+}
+
+.infoForm input {
+  background: transparent;
+  border: none;
+  border-bottom: 0.2em solid #fff;
+  color: #fff;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  margin: 0.2em;
+  width: 10em;
+}
+
+.infoForm input::placeholder {
+  color: #fff;
+}
+
+.infoForm .inputError {
+  color: #9a5f5f;
+  font-size: 0.8em;
+  font-weight: 500;
+  margin: 0;
+  text-align: center;
+}
+
+.formBtn {
+  border-radius: 0.2em;
+  margin: 0 0.5em;
+  padding: 0.2em 0.4em;
+  width: 4.2em;
+}
+
+.formBtn p {
+  margin: 0;
+}
+
+/* grade book page */
+
+#gradeBookPage {
+  flex-wrap: wrap;
+}
+
+.studentImgCircle {
+  border-radius: 50%;
+  height: 10em;
+  margin: 2em;
+  width: 10em;
+}
+
+.studentGrades {
+  margin: 0
+}
+
+.avgBtn,
+.deleteBtn {
+  border-radius: 0.4em;
+  padding: 0.4em 1em;
+}
+
+.avgBtn > p,
+.deleteBtn > p {
+  margin: 0;
 }

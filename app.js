@@ -18,6 +18,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 app.use(jsonParser);
 app.use(urlencodedParser);
 app.use('/', router);
+app.use(express.static('public'));
 
 //run app
 const PORT = process.env.PORT || 8000;

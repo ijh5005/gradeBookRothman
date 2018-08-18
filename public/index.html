@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" media="only screen and (min-width:768px) and (max-width:980px)" href="css/style_768.css">
     <link rel="stylesheet" type="text/css" media="only screen and (min-width:600px) and (max-width:767px)" href="css/style_600.css">
     <link rel="stylesheet" type="text/css" media="only screen and (min-width:300px) and (max-width:599px)" href="css/style_300.css">
+    <link rel="stylesheet" href="./css/studentimgs.css">
     <link rel="stylesheet" href="./css/animation.css">
 
     <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c:100,300,400,500,700,800,900" rel="stylesheet">
@@ -23,6 +24,67 @@
   <body ng-app='app' ng-controller='ctrl' ng-cloak>
 
     <div id="container" class="">
+      <!-- confirmation -->
+      <div id="confirmationBoxHolder" class="flexRow fullSize">
+        <div id="confirmationBox" class="flexRow">
+          <p>Student added to gradebook!</p>
+        </div>
+      </div>
+
+      <!-- /* add student page */ -->
+      <div id="addStudentPage" class="fullSize flexRow">
+        <div id="studentChoiceSection" class="fullSize">
+          <div id="hideStudentChoiceSectionBtn" class="flexRow" ng-click='hideStudentChoiceSection()'><p>&#xd7;</p></div>
+
+          <div data={{$index}} class="studentAddBox flexRow" ng-click='editForm($index)' ng-repeat='student in students track by $index'>
+            <div class="studentToAdd pointer flexRow" ng-class='studentClass(student)'></div>
+            <div class="infoForm flexCol">
+              <input type="text" name="name" value="" placeholder={{student.name}}>
+              <input type="text" name="testscore1" value="" placeholder="test score 1">
+              <input type="text" name="testscore2" value="" placeholder="test score 2">
+              <input type="text" name="testscore3" value="" placeholder="test score 3">
+              <p data={{$index}} class="inputError"></p>
+
+              <div class="flexRow">
+                <div class="formBtn flexRow pointer" ng-click='selectDifferentStudent($index)'><p>BACK</p></div>
+                <div class="formBtn flexRow pointer" ng-click='submitStudent($index, student.classImg)'><p>SUBMIT</p></div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- /* grade book page */ -->
+      <div id="gradeBookPage" class="flexRow 90">
+        <div class="studentGrades flexCol" ng-repeat='student in studentInfo track by $index'>
+          <div class="studentImgCircle" ng-class='studentClass(student)'></div>
+          <div class="">
+            <span class="label">Name:</span><span>{{student.name}}</span><br>
+            <span class="label">Test Score 1:</span><span>{{student.testscore1}}</span><br>
+            <span class="label">Test Score 2:</span><span>{{student.testscore2}}</span><br>
+            <span class="label">Test Score 3:</span><span>{{student.testscore3}}</span><br>
+            <span class="label" ng-if='student.average'>{{Average: + student.average}}<span><br>
+            <div class="flexRow">
+              <div class="avgBtn label pointer">
+                <p>AVERAGE</p>
+              </div>
+              <div class="deleteBtn label pointer">
+                <p>DELETE</p>
+              </div>
+            </div>
+          </div>
+          <div class="" ng-if='student.average'>
+            <p>Average</p><span>{{student.average}}</span>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="addBtn pointer" ng-click='addStudent()'>
+        <p>ADD STUDENT</p>
+      </div>
 
     </div>
 
