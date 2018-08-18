@@ -6,6 +6,7 @@ const Student = require('../models/student');
 router.get('/students', (req, res, next) => {
   Student.find()
          .then(student => {
+           console.log(student);
            res.json(student);
          }).catch(err => console.log(err));
 });

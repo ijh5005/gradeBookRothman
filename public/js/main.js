@@ -17,12 +17,6 @@ app.controller('ctrl', ['$scope', '$rootScope', '$interval', '$timeout', functio
     $(".studentAddBox").removeClass('showForm');
     $(`.studentAddBox[data="${data}"]`).addClass('showForm');
   }
-  $scope.selectDifferentStudent = (data) => {
-    $timeout(() => {
-      $(`.studentAddBox[data='${data}']`).removeClass('showForm');
-      $('input').val('');
-    }, 100)
-  }
   $scope.submitStudent = (data, img) => {
     const name = $(`.studentAddBox[data="${data}"] .infoForm input[name="name"]`).val();
     const defaultName = $(`.studentAddBox[data="${data}"] .infoForm input[name="name"]`).attr('placeholder');
@@ -49,7 +43,7 @@ app.controller('ctrl', ['$scope', '$rootScope', '$interval', '$timeout', functio
       }).done(msg => {
         $('input').val('');
         $scope.hideStudentChoiceSection();
-        $scope.confirmation();
+        $scope.confirmation('Student added to gradebook!');
         $scope.fetchStudents();
       }).fail(err => {
         $scope.inputError(err.responseJSON.student, data);
@@ -114,11 +108,27 @@ app.controller('ctrl', ['$scope', '$rootScope', '$interval', '$timeout', functio
     });
   }
   $scope.fetchStudents();
-  $scope.confirmation = () => {
-    $('#confirmationBoxHolder').addClass('confirmation');
+  $scope.confirmation = (text) => {
+    $('#confirmationBoxHolder').addClass('confirmation')
+    $('#confirmationBox p').text(text);
     $timeout(() => {
       $('#confirmationBoxHolder').removeClass('confirmation');
     }, 2000);
+  }
+  $scope.showAverage = (index, student) => {
+    $scope.studentInfo[index]['average'] = ((parseFloat(student.testscore1) + parseFloat(student.testscore2) + parseFloat(student.testscore3)) / 3);
+  }
+  $scope.deleteStudent = (student) => {
+    $.ajax({
+      method: "DELETE",
+      url: "http://localhost:8000/removeStudent",
+      data: { name: student.name, id: student._id }
+    }).done(msg => {
+      $scope.confirmation('student deleted');
+      $scope.fetchStudents();
+    }).fail(err => {
+      console.log(err);
+    });
   }
 
 }]);
