@@ -1,0 +1,15 @@
+:root {
+
+}
+
+body {
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+}
+
+/* general */
+
+/* container */
+#container {
+  height: 100vh;
+  width: 100vw;
+}
