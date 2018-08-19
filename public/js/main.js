@@ -4,7 +4,9 @@ var app = angular.module('app', []);
 
 app.controller('ctrl', ['$scope', '$rootScope', '$interval', '$timeout', function($scope, $rootScope, $interval, $timeout){
 
+  $scope.searchType = '';
   $scope.removeError = '';
+  $scope.searchBoxOpen = false;
   $scope.addStudent = () => {
     $('#addStudentPage').addClass('show');
   }
@@ -18,6 +20,7 @@ app.controller('ctrl', ['$scope', '$rootScope', '$interval', '$timeout', functio
     $(`.studentAddBox[data="${data}"]`).addClass('showForm');
   }
   $scope.submitStudent = (data, img) => {
+    const idNumber = $(`.studentAddBox[data="${data}"] .infoForm input[name="id"]`).val();
     const name = $(`.studentAddBox[data="${data}"] .infoForm input[name="name"]`).val();
     const defaultName = $(`.studentAddBox[data="${data}"] .infoForm input[name="name"]`).attr('placeholder');
     const testscore1 = $(`.studentAddBox[data="${data}"] .infoForm input[name="testscore1"]`).val();
@@ -34,6 +37,7 @@ app.controller('ctrl', ['$scope', '$rootScope', '$interval', '$timeout', functio
         method: "POST",
         url: "http://localhost:8000/addstudent",
         data: {
+          idNumber,
           name: (name.trim().length === 0) ? defaultName : name,
           testscore1,
           testscore2,
@@ -102,7 +106,6 @@ app.controller('ctrl', ['$scope', '$rootScope', '$interval', '$timeout', functio
     }).done(msg => {
       $scope.studentInfo = msg;
       $scope.$apply()
-      console.log($scope.studentInfo);
     }).fail(err => {
       console.log(msg);
     });
@@ -129,6 +132,58 @@ app.controller('ctrl', ['$scope', '$rootScope', '$interval', '$timeout', functio
     }).fail(err => {
       console.log(err);
     });
+  }
+  $scope.showSearchBox = () => {
+    $('#searchBoxHolder').removeClass('hide');
+  }
+  $scope.searchStudentByName = () => {
+    $scope.searchType = 'name';
+    $scope.showSearchBox();
+  }
+  $scope.searchStudentById = () => {
+    $scope.searchType = 'id';
+    $scope.showSearchBox();
+  }
+  $scope.enterPressed = (e) => {
+    let inputValue = $('#searchFromHomePage').val();
+    inputValue = inputValue.trim();
+    if(inputValue.length === 0) {
+      return null
+    }
+
+    if(e.key === 'Enter' && $scope.searchType === 'name'){
+      $.ajax({
+        method: "POST",
+        url: "http://localhost:8000/findstudentbyname",
+        data: { name: inputValue }
+      }).done(msg => {
+        $scope.studentInfo = [msg];
+        $scope.$apply()
+      }).fail(err => {
+        $scope.confirmation('sorry no student found under that name. warning: input is case sensitive');
+        $('input').blur();
+        $scope.hideSearchBox();
+      });
+    } else if(e.key === 'Enter' && $scope.searchType === 'id'){
+      $.ajax({
+        method: "POST",
+        url: "http://localhost:8000/findstudentbyid",
+        data: { idNumber: inputValue }
+      }).done(msg => {
+        $scope.studentInfo = [msg];
+        $scope.$apply()
+      }).fail(err => {
+        $scope.confirmation('sorry no student found under that id. warning: input is case sensitive');
+        $('input').blur();
+        $scope.hideSearchBox();
+      });
+    }
+  }
+  $scope.hideSearchBox = () => {
+    if(!$scope.searchBoxOpen && document.activeElement.id !== 'searchFromHomePage'){
+      $('#searchBoxHolder').addClass('hide');
+      $scope.searchBoxOpen = false;
+    }
   }
 
 }]);

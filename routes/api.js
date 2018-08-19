@@ -13,17 +13,18 @@ router.get('/students', (req, res, next) => {
 
 // add one student to database
 router.post('/addstudent', (req, res, next) => {
-  const { name, testscore1, testscore2, testscore3, img } = req.body;
+  const { idNumber, name, testscore1, testscore2, testscore3, img } = req.body;
   const errors = {};
-  Student.findOne({ name })
+  Student.findOne({ idNumber })
          .then(student => {
            if(student){
-             errors.student = 'Student already exists! Please select a different name.'
+             errors.student = 'ID number already exists! Please select a different id.'
              return res.status(400).json(errors)
            }
-           const newStudent = new Student({ name, testscore1, testscore2, testscore3, img });
+           console.log(idNumber);
+           const newStudent = new Student({ idNumber, name, testscore1, testscore2, testscore3, img });
            newStudent.save();
-           res.json({ student: 'Student added to grade book!', user: { name, testscore1, testscore2, testscore3 } });
+           res.json({ student: 'Student added to grade book!', user: { idNumber, name, testscore1, testscore2, testscore3 } });
          }).catch(err => console.log(err));
 });
 
@@ -43,10 +44,11 @@ router.post('/findstudentbyname', (req, res, next) => {
 
 // find one student by id
 router.post('/findstudentbyid', (req, res, next) => {
-  const { id } = req.body;
+  const { idNumber } = req.body;
   const errors = {};
-  Student.findOne({ _id: id })
+  Student.findOne({ idNumber })
          .then(student => {
+           console.log(student);
            if(student){
              return res.json(student)
            }

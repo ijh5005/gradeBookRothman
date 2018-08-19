@@ -24,6 +24,14 @@
   <body ng-app='app' ng-controller='ctrl' ng-cloak>
 
     <div id="container" class="">
+
+      <!-- search box -->
+      <div id="searchBoxHolder" class="fullSize flexRow hide" ng-click='hideSearchBox()'>
+        <div id="searchBox" class="flexRow">
+          <input id="searchFromHomePage" type="text" name="" value="" ng-keyup='enterPressed($event)' ng-focus='showSearchBox()'>
+        </div>
+      </div>
+
       <!-- confirmation -->
       <div id="confirmationBoxHolder" class="flexRow fullSize">
         <div id="confirmationBox" class="flexRow">
@@ -39,6 +47,7 @@
           <div data={{$index}} class="studentAddBox flexRow" ng-click='editForm($index)' ng-repeat='student in students track by $index'>
             <div class="studentToAdd pointer flexRow" ng-class='studentClass(student)'></div>
             <div class="infoForm flexCol">
+              <input type="text" name="id" value="" placeholder="enter id number">
               <input type="text" name="name" value="" placeholder={{student.name}}>
               <input type="text" name="testscore1" value="" placeholder="test score 1">
               <input type="text" name="testscore2" value="" placeholder="test score 2">
@@ -55,31 +64,42 @@
         </div>
       </div>
 
-      <!-- /* grade book page */ -->
-      <div id="gradeBookPage" class="flexRow 90">
-        <div class="studentGrades flexCol" ng-repeat='student in studentInfo track by $index'>
-          <div class="studentImgCircle" ng-class='studentClass(student)'></div>
-          <div class="">
-            <span class="label">Name:</span><span>{{student.name}}</span><br>
-            <span class="label">Test Score 1:</span><span>{{student.testscore1}}</span><br>
-            <span class="label">Test Score 2:</span><span>{{student.testscore2}}</span><br>
-            <span class="label">Test Score 3:</span><span>{{student.testscore3}}</span><br>
-            <span class="label" ng-if='student.average'>Average : {{student.average | number:2}}</p></span>
-            <div class="flexRow">
-              <div class="avgBtn pointer" ng-click='showAverage($index, student)'>
-                <p>AVERAGE</p>
-              </div>
-              <div class="deleteBtn pointer" ng-click='deleteStudent(student)'>
-                <p>DELETE</p>
+      <div class="fullSize flexRow">
+        <!-- /* grade book page */ -->
+        <div id="gradeBookPage" class="flexRow w50 fullHeight">
+          <div class="studentGrades flexCol" ng-repeat='student in studentInfo track by $index'>
+            <div class="studentImgCircle" ng-class='studentClass(student)'></div>
+            <div class="">
+              <div class="odd"><span class="label">Name:</span><span>{{student.name}}</span></div>
+              <div><span class="label">ID:</span><span>{{student.idNumber}}</span></div>
+              <div class="odd"><span class="label">Test Score 1:</span><span>{{student.testscore1}}</span></div>
+              <div><span class="label">Test Score 2:</span><span>{{student.testscore2}}</span></div>
+              <div class="odd"><span class="label">Test Score 3:</span><span>{{student.testscore3}}</span></div>
+              <div><span class="label" ng-if='student.average'>Average : {{student.average | number:2}}</span></div>
+              <div class="studentBoxBtns flexRow">
+                <div class="avgBtn pointer" ng-click='showAverage($index, student)'>
+                  <p>AVERAGE</p>
+                </div>
+                <div class="deleteBtn pointer" ng-click='deleteStudent(student)'>
+                  <p>DELETE</p>
+                </div>
               </div>
             </div>
+
           </div>
-
         </div>
-      </div>
 
-      <div class="addBtn pointer" ng-click='addStudent()'>
-        <p>ADD STUDENT</p>
+        <div class="fullHeight flexCol w50">
+          <div class="addBtn pointer" ng-click='addStudent()'>
+            <p>ADD STUDENT</p>
+          </div>
+          <div class="addBtn pointer" ng-click='searchStudentByName()'>
+            <p>SEARCH BY NAME</p>
+          </div>
+          <div class="addBtn pointer" ng-click='searchStudentById()'>
+            <p>SEARCH BY ID</p>
+          </div>
+        </div>
       </div>
 
     </div>

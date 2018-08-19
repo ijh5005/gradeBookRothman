@@ -48,10 +48,15 @@
 
 #addStudentPage.show {
   z-index: 2;
-  opacity: 0.9;
+  opacity: 1;
 }
 
 #confirmationBoxHolder.confirmation {
   z-index: 10;
   opacity: 1;
+}
+
+#searchBoxHolder.hide {
+  z-index: -10;
+  opacity: 0;
 }
