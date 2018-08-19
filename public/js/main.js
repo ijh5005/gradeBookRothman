@@ -35,7 +35,7 @@ app.controller('ctrl', ['$scope', '$rootScope', '$interval', '$timeout', functio
     } else {
       $.ajax({
         method: "POST",
-        url: "https://gradebookrothman.herokuapp.com/addstudent",
+        url: "https://gradebookrothman.herokuapp.comaddstudent",
         data: {
           idNumber,
           name: (name.trim().length === 0) ? defaultName : name,
@@ -102,7 +102,7 @@ app.controller('ctrl', ['$scope', '$rootScope', '$interval', '$timeout', functio
   $scope.fetchStudents = () => {
     $.ajax({
       method: "GET",
-      url: "https://gradebookrothman.herokuapp.com//students"
+      url: "https://gradebookrothman.herokuapp.com/students"
     }).done(msg => {
       $scope.studentInfo = msg;
       $scope.$apply()
@@ -124,7 +124,7 @@ app.controller('ctrl', ['$scope', '$rootScope', '$interval', '$timeout', functio
   $scope.deleteStudent = (student) => {
     $.ajax({
       method: "DELETE",
-      url: "https://gradebookrothman.herokuapp.com//removeStudent",
+      url: "https://gradebookrothman.herokuapp.com/removeStudent",
       data: { name: student.name, id: student._id }
     }).done(msg => {
       $scope.confirmation('student deleted');
@@ -154,7 +154,7 @@ app.controller('ctrl', ['$scope', '$rootScope', '$interval', '$timeout', functio
     if(e.key === 'Enter' && $scope.searchType === 'name'){
       $.ajax({
         method: "POST",
-        url: "https://gradebookrothman.herokuapp.com//findstudentbyname",
+        url: "https://gradebookrothman.herokuapp.com/findstudentbyname",
         data: { name: inputValue }
       }).done(msg => {
         $scope.studentInfo = [msg];
@@ -167,7 +167,7 @@ app.controller('ctrl', ['$scope', '$rootScope', '$interval', '$timeout', functio
     } else if(e.key === 'Enter' && $scope.searchType === 'id'){
       $.ajax({
         method: "POST",
-        url: "https://gradebookrothman.herokuapp.com//findstudentbyid",
+        url: "https://gradebookrothman.herokuapp.com/findstudentbyid",
         data: { idNumber: inputValue }
       }).done(msg => {
         $scope.studentInfo = [msg];
