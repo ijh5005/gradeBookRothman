@@ -26,7 +26,7 @@ app.controller('ctrl', ['$scope', '$rootScope', '$interval', '$timeout', functio
     const testscore1 = $(`.studentAddBox[data="${data}"] .infoForm input[name="testscore1"]`).val();
     const testscore2 = $(`.studentAddBox[data="${data}"] .infoForm input[name="testscore2"]`).val();
     const testscore3 = $(`.studentAddBox[data="${data}"] .infoForm input[name="testscore3"]`).val();
-    const hasEmptyFields = ((testscore1.trim().length === 0) || (testscore2.trim().length === 0) || (testscore3.trim().length === 0));
+    const hasEmptyFields = ((idNumber.trim().length === 0) || (testscore1.trim().length === 0) || (testscore2.trim().length === 0) || (testscore3.trim().length === 0));
     const testScoreNotNumerical = (isNaN(testscore1) || isNaN(testscore2) || isNaN(testscore3));
     if(hasEmptyFields){
       $scope.inputError('must fill in all fields', data);
