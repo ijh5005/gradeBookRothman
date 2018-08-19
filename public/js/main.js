@@ -35,7 +35,7 @@ app.controller('ctrl', ['$scope', '$rootScope', '$interval', '$timeout', functio
     } else {
       $.ajax({
         method: "POST",
-        url: "https://gradebookrothman.herokuapp.comaddstudent",
+        url: "https://gradebookrothman.herokuapp.com/addstudent",
         data: {
           idNumber,
           name: (name.trim().length === 0) ? defaultName : name,
